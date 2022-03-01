@@ -21,13 +21,20 @@ const DetailPage = () => {
   const [url, setUrl] = useState("");
   const [coordX, setCoordX] = useState("");
   const [coordY, setCoordY] = useState("");
+  const [location, setLocation] = useState("");
+  const [imgUrl, setImgUrl] = useState("");
+  const [name, setName] = useState("");
+  const [rate, setRate] = useState("");
 
   useEffect(() => {
     GET(`/api/main/SearchDetailed?FAD_NO=${id}&FAD_TYPE=${type}`).then(
       (res) => {
-        console.log(res);
         const ans = res.data.data;
         console.log(ans);
+        setName(ans.fadName);
+        setRate(ans.fadRate);
+        setImgUrl(ans.fadImg);
+        setLocation(ans.fadLocation);
         setCau(ans.fadCau);
         setInfo(ans.fadInfo);
         setInt(ans.fadInt);
@@ -46,17 +53,17 @@ const DetailPage = () => {
         <div className="DetailPage__header">
           <img
             width="130px"
-            src={process.env.PUBLIC_URL + `/assets/danceacademy_logo.png`}
-            alt="시설이미지"
+            src={process.env.PUBLIC_URL + imgUrl}
+            alt="로고"
           />
           <div className="DetailPage__header__info">
             <div className="DetailPage__header__name">
-              <h4>강남 댄스 스튜디오</h4>
+              <h4>{name}</h4>
               <AiOutlineStar />
               <AiFillStar />
             </div>
-            <h6>⭐️ 4.91</h6>
-            <h6>주소 | 서울특별시 강남구 논현로</h6>
+            <h6>⭐️ {rate}</h6>
+            <h6>주소 | {location}</h6>
             <h6>홈페이지 | {url}</h6>
           </div>
         </div>
@@ -68,7 +75,7 @@ const DetailPage = () => {
 
         <MyDiv head={"주의 사항"} innerText={cau} />
 
-        <MyMap head={"위치 안내"} address={"서울 송파구 올림픽로 300"} cx={coordX} cy={coordY}/>
+        <MyMap head={"위치 안내"} address={location} cx={coordX} cy={coordY}/>
       </div>
       <MyFooter />
     </>
