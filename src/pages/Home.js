@@ -1,7 +1,7 @@
 import { GiHamburgerMenu } from "react-icons/gi";
 
 import { useNavigate } from "react-router-dom";
-import { useContext, useEffect, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 
 import MyHeader from "../components/MyHeader";
 import MyFooter from "../components/MyFooter";
@@ -73,13 +73,15 @@ const Home = () => {
   const [dancerooms, setDanceRooms] = useState([]);
   const [dancers, setDancers] = useState([]);
 
-  useEffect(() => {
+  const getData = useCallback(() => {
     getMainInfoAcademy();
     getMainInfoDanceRooms();
     getMainInfoDancers();
+  }, []);
 
-  }, [login]);
-
+  useEffect(()=>{
+    getData();
+  },[])
   return (
     <div className="Home">
       <MyHeader
