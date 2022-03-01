@@ -54,7 +54,7 @@ const DetailPage = () => {
           <img
             width="130px"
             src={process.env.PUBLIC_URL + imgUrl}
-            alt="로고"
+            alt="시설 사진"
           />
           <div className="DetailPage__header__info">
             <div className="DetailPage__header__name">

@@ -41,13 +41,14 @@ const SignIn = () => {
       USR_PASS: password,
       LOGIN_TYPE: "L",
     }).then((result) => {
+      console.log(result);
       window.localStorage.setItem(
         "A_TOKEN",
-        JSON.stringify(result.data.data[0].A_TOKEN)
+        JSON.stringify(result.data.data.aToken)
       );
       window.localStorage.setItem(
         "R_TOKEN",
-        JSON.stringify(result.data.data[0].R_TOKEN)
+        JSON.stringify(result.data.data.rToken)
       );
       r_login(login);
       navigate("/", { replace: true });
